@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions';
@@ -25,14 +26,16 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form 
+      <form
         className="input-group"
-        onSubmit={e => this.onFormSubmit(e)}>
-        <input 
+        onSubmit={e => this.onFormSubmit(e)}
+      >
+        <input
           placeholder="Get a five-day forecast in your favorite cities"
           className="form-control"
           value={this.state.term}
-          onChange={this.onInputChange} />
+          onChange={this.onInputChange}
+        />
         <span className="input-group-btn">
           <button type="submit" className="btn btn-secondary">Submit</button>
         </span>
@@ -40,6 +43,10 @@ class SearchBar extends Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  fetchWeather: PropTypes.func.isRequired,
+};
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchWeather }, dispatch);
