@@ -5,7 +5,7 @@ import { Sparklines, SparklinesLine } from 'react-sparklines';
 const Chart = props =>
   (
     <div>
-      <Sparklines height={120} width={180} data={props.data}>
+      <Sparklines svgHeight={120} svgWidth={180} data={props.data}>
         <SparklinesLine color={props.color} />
       </Sparklines>
     </div>
