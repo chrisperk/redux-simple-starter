@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Chart from '../components/chart';
 
-const renderWeather = city =>
-  (
+const renderWeather = (city) => {
+  const temps = city.list.map(weather => weather.main.temp);
+
+  return (
     <tr key={city.city.id}>
       <td>{city.city.name}</td>
+      <td>
+        <Chart data={temps} color="red" />
+      </td>
     </tr>
   );
+};
 
 const WeatherList = props =>
   (
