@@ -13,13 +13,13 @@ const renderWeather = (city) => {
     <tr key={city.city.id}>
       <td>{city.city.name}</td>
       <td>
-        <Chart data={temps} color="red" />
+        <Chart data={temps} color="red" units="K" />
       </td>
       <td>
-        <Chart data={pressures} color="blue" />
+        <Chart data={pressures} color="blue" units="hPa" />
       </td>
       <td>
-        <Chart data={humidities} color="yellow" />
+        <Chart data={humidities} color="green" units="%" />
       </td>
     </tr>
   );
@@ -31,9 +31,9 @@ const WeatherList = props =>
       <thead>
         <tr>
           <th>City</th>
-          <th>Temperature</th>
-          <th>Pressure</th>
-          <th>Humidity</th>
+          <th>Temperature (K)</th>
+          <th>Pressure (hPa)</th>
+          <th>Humidity (%)</th>
         </tr>
       </thead>
       <tbody>
