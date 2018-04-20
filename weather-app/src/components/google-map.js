@@ -1,9 +1,10 @@
+/* eslint-disable no-new, no-undef */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class GoogleMap extends Component {
   componentDidMount() {
-    new google.maps.Map(this.refs.map, {
+    new google.maps.Map(this.mapRef, {
       zoom: 12,
       center: {
         lat: this.props.lat,
@@ -15,7 +16,7 @@ class GoogleMap extends Component {
   render() {
     return (
       // refer to html element with this.refs.map
-      <div ref="map" />
+      <div ref={(el) => { this.mapRef = el; }} />
     );
   }
 }
