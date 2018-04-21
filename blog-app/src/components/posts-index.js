@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import _ from 'lodash';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
 
 class PostsIndex extends Component {
@@ -21,6 +23,11 @@ class PostsIndex extends Component {
   render() {
     return (
       <div>
+        <div className="text-xs-right">
+          <Link className="btn btn-primary" to="/posts/new">
+            Add a Post
+          </Link>
+        </div>
         <h3>Posts</h3>
         <ul className="list-group">
           {this.renderPosts()}
@@ -32,7 +39,13 @@ class PostsIndex extends Component {
 
 PostsIndex.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  posts: PropTypes.shape({
+    key: {
+      id: PropTypes.number,
+      title: PropTypes.string,
+      content: PropTypes.string,
+    },
+  }).isRequired,
 };
 
 function mapStateToProps(state) {
