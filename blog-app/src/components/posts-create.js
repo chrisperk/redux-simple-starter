@@ -14,6 +14,7 @@ function renderField(field) {
           type={field.type}
           {...field.input}
         />
+        {field.meta.error}
       </label>
     </div>
   );
@@ -24,7 +25,7 @@ function validate(values) {
   const errors = {};
 
   // Validate the inputs from values param.
-  if (!values.title || values.titles.length < 3) {
+  if (!values.title || values.title.length < 3) {
     errors.title = 'Enter a title that is at least 3 characters!';
   }
 
