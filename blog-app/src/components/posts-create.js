@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import { Field, reduxForm } from 'redux-form';
 
 class PostsCreate extends Component {
   render() {
     return (
-      <div>
-        Posts Create
-      </div>
+      <form>
+        <Field
+          name="title"
+          component={}
+        />
+      </form>
     );
   }
 }
 
-export default PostsCreate;
+export default reduxForm({
+  form: 'PostsCreateForm',
+})(PostsCreate);
