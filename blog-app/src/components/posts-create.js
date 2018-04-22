@@ -1,21 +1,33 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 
 function renderField(field) {
+  const {
+    meta: { touched, error },
+    name,
+    label,
+    type,
+    input,
+  } = field;
+  const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
   return (
-    <div className="form-group">
-      <label htmlFor={field.name}>
-        {field.label}
+    <div className={className}>
+      <label htmlFor={name}>
+        {label}
         <input
           className="form-control"
-          name={field.name}
-          id={field.name}
-          type={field.type}
-          {...field.input}
+          name={name}
+          id={name}
+          type={type}
+          {...input}
         />
-        {field.meta.error}
+        <div className="text-help">
+          {touched ? error : ''}
+        </div>
       </label>
     </div>
   );
@@ -51,6 +63,7 @@ const PostsCreate = (props) => {
   const { handleSubmit } = props;
 
   return (
+    // Use redux-form's handleSubmit method and pass our onSubmit function to it as param.
     <form onSubmit={handleSubmit(onSubmit)}>
       <Field
         label="Title"
@@ -71,6 +84,9 @@ const PostsCreate = (props) => {
         component={renderField}
       />
       <button type="submit" className="btn btn-primary">Submit</button>
+      <Link className="btn btn-danger" to="/">
+        Cancel
+      </Link>
     </form>
   );
 };
