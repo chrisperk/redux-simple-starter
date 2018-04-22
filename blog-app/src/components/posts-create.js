@@ -61,7 +61,9 @@ const PostsCreate = (props) => {
   const { handleSubmit } = props;
 
   function onSubmit(values) {
-    props.createPost(values);
+    props.createPost(values, () => {
+      props.history.push('/');
+    });
   }
 
   return (
@@ -96,6 +98,7 @@ const PostsCreate = (props) => {
 PostsCreate.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   createPost: PropTypes.func.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default reduxForm({
