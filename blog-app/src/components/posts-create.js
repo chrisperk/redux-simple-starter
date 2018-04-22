@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 
@@ -42,9 +43,15 @@ function validate(values) {
   return errors;
 }
 
-const PostsCreate = () =>
-  (
-    <form>
+function onSubmit(values) {
+  console.log(values);
+}
+
+const PostsCreate = (props) => {
+  const { handleSubmit } = props;
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Field
         label="Title"
         type="text"
@@ -63,8 +70,14 @@ const PostsCreate = () =>
         name="content"
         component={renderField}
       />
+      <button type="submit" className="btn btn-primary">Submit</button>
     </form>
   );
+};
+
+PostsCreate.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default reduxForm({
   validate,
