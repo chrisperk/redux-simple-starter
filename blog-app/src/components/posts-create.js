@@ -3,6 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 function renderField(field) {
   const {
@@ -55,12 +57,12 @@ function validate(values) {
   return errors;
 }
 
-function onSubmit(values) {
-  console.log(values);
-}
-
 const PostsCreate = (props) => {
   const { handleSubmit } = props;
+
+  function onSubmit(values) {
+    props.createPost(values);
+  }
 
   return (
     // Use redux-form's handleSubmit method and pass our onSubmit function to it as param.
@@ -93,9 +95,10 @@ const PostsCreate = (props) => {
 
 PostsCreate.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  createPost: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   validate,
   form: 'PostsCreateForm',
-})(PostsCreate);
+})(connect(null, { createPost })(PostsCreate));
