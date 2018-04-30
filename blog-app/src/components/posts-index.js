@@ -15,7 +15,7 @@ class PostsIndex extends Component {
     return _.map(this.props.posts, post =>
       (
         <li className="list-group-item" key={post.id}>
-          {post.title}
+          <Link to={`/posts/${post.id}`}>{post.title}</Link>
         </li>
       ));
   }
@@ -40,11 +40,12 @@ class PostsIndex extends Component {
 PostsIndex.propTypes = {
   fetchPosts: PropTypes.func.isRequired,
   posts: PropTypes.shape({
-    key: {
+    key: PropTypes.shape({
       id: PropTypes.number,
       title: PropTypes.string,
+      categories: PropTypes.string,
       content: PropTypes.string,
-    },
+    }),
   }).isRequired,
 };
 
